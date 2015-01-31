@@ -21,7 +21,10 @@
  */
 package cpd3314.assign4;
 
+import java.io.*;
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -33,7 +36,7 @@ public class CPD3314Assign4 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)throws Exception {
         Scanner input = new Scanner(System.in);
         String[] questions = {
             "1. Sum of Numbers",
@@ -99,6 +102,25 @@ public class CPD3314Assign4 {
      *   The sum of all integers up to 50 is 1275.
      */
     public static void doExercise1() {
+        System.out.println("enter a non zero positive number");
+        int initial=0;
+        int i;
+        int number;
+        Scanner in=new Scanner(System.in);
+        number=in.nextInt();
+        if(number<0)
+        {
+            System.out.println("enter a positive number");
+        }
+        else
+        {
+            for(i=1;i<=number;i++)
+            {
+                initial=initial+i;
+            }
+            System.out.println("The sum of all integers up to "+number+" is "+initial);
+        }
+        
         // TODO: Com[plete Exercise 1 Below
 
     }
@@ -128,8 +150,39 @@ public class CPD3314Assign4 {
      * Input Validation: Do not accept a negative number for speed and do not 
      * accept any value less than 1 for time traveled.
      */
-    public static void doExercise3() {
-        // TODO: Complete Exercise 2 & 3 Below
+    public static void doExercise3() throws FileNotFoundException {
+        int speed,hours;
+        int i;
+      int dis;
+        //Formatter fmt = new Formatter(f);
+        try ( //File f=new File("ex3ouput.txt");
+                PrintWriter p = new PrintWriter("ex3output.txt")) {
+            //Formatter fmt = new Formatter(f);
+            Scanner in=new Scanner(System.in);
+            System.out.println("enter the speed of the vehicle in mph");
+            speed=in.nextInt();
+            System.out.println("enter the hours it travelled");
+            hours=in.nextInt();
+            p.println("hours             Distance travelled");
+            p.println("-------------------------------------");
+            if(hours>1 && speed>0)
+            {
+                for(i=1;i<=hours;i++)
+                    
+                {
+                    dis=speed*i;
+                    p.println(+i+"                   "+dis);
+                    //System.out.println(dis);
+                    //fmt.format("\n" +dis);
+                    //fmt.flush();
+                    
+                }
+            }
+            else
+            {
+                System.out.println("enter valid value");
+            }
+        }
 
     }
 
@@ -161,6 +214,35 @@ public class CPD3314Assign4 {
      *   Largest number is 7.
      */
     public static void doExercise10() {
+        
+        
+        Scanner in=new Scanner(System.in);
+        int large=0;
+        int small=9999999;
+        int num;
+        System.out.println("Enter an Integer  (-99 to quit)");
+        num=in.nextInt();
+        
+       while(num!=-99)
+       {
+            
+            
+            
+            if(num>large)
+            {
+                large=num;
+            }
+            if(num<small)
+            {
+                small=num;
+            }
+            System.out.println("Enter an Integer  (-99 to quit)");
+            num=in.nextInt();
+       }    
+           
+         
+        System.out.println("Smallest number is "+small);
+        System.out.println("Largest number is "+large);
         // TODO: Complete Exercise 10 Below
 
     }
@@ -191,6 +273,18 @@ public class CPD3314Assign4 {
      *   100.0    212.0
      */
     public static void doExercise11() {
+        double i;
+        double f;
+        DecimalFormat form = new DecimalFormat("#0.00");
+        System.out.println("C       F");
+            System.out.println("---------");
+        for(i=0;i<=100;i++)
+        {
+            f = (9.0/5.0) * i + 32;
+            
+            System.out.println(+i+"      "+form.format(f));
+            
+        }
         // TODO: Complete Exercise 11 Below
 
     }
@@ -212,7 +306,22 @@ public class CPD3314Assign4 {
      *   3: But you shall shine more bright in these contents
      *   ...
      */
-    public static void doExercise14() {
+    public static void doExercise14() throws FileNotFoundException {
+        System.out.println("which file do you want to read:");
+        Scanner scan=new Scanner(System.in);
+        
+        String filename=scan.nextLine();
+        File f=new File(filename);
+        Scanner fscan=new Scanner(f);
+        int i=1;
+        while(fscan.hasNext())
+        {
+            String fileline=fscan.nextLine();
+            System.out.println(+i+": "+fileline);
+            i++;
+        }
+        
+        
         // TODO: Complete Exercise 14 Below
 
     }
@@ -248,6 +357,30 @@ public class CPD3314Assign4 {
      *   Correct! That took 7 attempts.
      */
     public static void doExercise18() {
+        Random rnum=new Random();
+        int rnm=rnum.nextInt(51);
+        System.out.println("Guess my number (0-50)");
+        Scanner in=new Scanner(System.in);
+        int guess=in.nextInt();
+        int num=1;
+        while(guess!=rnm)
+        {
+            if(guess<rnm)
+            {
+                System.out.println("Too low, try again");
+                System.out.println("Guess my number (0-50)");
+                guess=in.nextInt();
+            }
+            else if(guess>rnm)
+            {
+                System.out.println("Too high, try again");
+                System.out.println("Guess my number (0-50)");
+                guess=in.nextInt();
+            }
+            num++;
+        }
+        System.out.println("Correct! That took "+num+" attempts.");
+        
         // TODO: Complete Exercise 17 & 18 Below
         
     }
